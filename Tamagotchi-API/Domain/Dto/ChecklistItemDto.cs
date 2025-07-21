@@ -1,10 +1,13 @@
-﻿namespace Tamagotchi_API.Domain.Dto
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Tamagotchi_API.Domain.Dto
 {
-    public class ChecklistItemDto(string title, string description, bool isComplete)
+    public class ChecklistItemDto
     {
-        public Guid Id { get; } = Guid.NewGuid();
-        public string Title { get; } = title;
-        public string Description { get; } = description;
-        public bool IsComplete { get; } = isComplete;
+        [Key]
+        public Guid Id { get; set; }
+        public string Title { get; set;  }
+        public string Description { get; set; }
+        public bool IsComplete { get; set;  }
     }
 }

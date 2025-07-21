@@ -20,8 +20,72 @@ namespace Tamagotchi_API.Controllers
         [HttpPost]
         public async Task<IActionResult> PostChecklistItem(ChecklistItemDto checklistItem)
         {
-            await _checklistService.AddChecklistItemAsync(checklistItem);
-            return Created();
+            try
+            {
+                await _checklistService.AddChecklistItemAsync(checklistItem);
+                return Created();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error",ex);
+            }
+        }
+
+        [HttpGet]
+        public List<ChecklistItemDto> GetChecklistItems()
+        {
+            try
+            {
+                var response = _checklistService.GetAllChecklistItems();
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error", ex);
+            }
+        }
+
+        [HttpGet("{id:Guid}")]
+        public ChecklistItemDto GetChecklistItem(Guid id)
+        {
+            try
+            {
+                var response = _checklistService.GetChecklistItemById(id);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error", ex);
+            }
+        }
+
+        [HttpPatch]
+        public async Task<IActionResult> UpdateChecklistItem(ChecklistItemDto checklistItem)
+        {
+            try
+            {
+                await _checklistService.UpdateChecklistItem(checklistItem);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error", ex);
+            }
+        }
+
+
+        [HttpDelete("{id:Guid}")]
+        public async Task<IActionResult> DeleteChecklistItem(Guid id)
+        {
+            try
+            {
+                await _checklistService.DeleteChecklistItem(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error", ex);
+            }
         }
     }
 }

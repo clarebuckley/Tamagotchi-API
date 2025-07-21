@@ -18,6 +18,7 @@ namespace Tamagotchi_API.Data
             modelBuilder.Entity<ChecklistItem>(item =>
             {
                 item.HasKey(x => x.Id);
+                item.Property(x => x.Id).HasDefaultValueSql("NEWID()");
                 item.Property(x => x.Title).HasColumnName("Title");
                 item.Property(x => x.Description).HasColumnName("Description");
                 item.Property(x => x.IsComplete).HasColumnName("IsComplete");
