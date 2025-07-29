@@ -1,19 +1,26 @@
-﻿namespace Tamagotchi_API.Domain.Entities
-{
-    public class ChecklistItem(string title, string description, bool isComplete)
-    {
-        public Guid Id { get; } = Guid.NewGuid();
-        public string Title { get; } = title;
-        public string Description { get; private set; } = description;
-        public bool IsComplete { get; private set; } = isComplete;
-        public void SetIsComplete(bool isComplete)
-        {
-            IsComplete = isComplete;
-        }
-        public void SetDescription(string description)
-        {
-            Description = description;
-        }
+﻿using System.ComponentModel.DataAnnotations;
 
+namespace Tamagotchi_API.Domain.Entities
+{
+    public class TamagotchiItem(string name)
+    {
+        [Key]
+        public Guid Id { get; set; }
+        public string Name { get; private set; } = name;
+        public string Age { get; private set; }
+        public int Happiness { get; private set; } = 0;
+
+        public void SetAge(string age)
+        {
+            Age = age;
+        }
+        public void IncreaseHappiness()
+        {
+            Happiness++;
+        }
+        public void DecreaseHappiness()
+        {
+            Happiness--;
+        }
     }
 }

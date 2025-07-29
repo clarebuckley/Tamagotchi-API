@@ -10,6 +10,8 @@ public class Program
         builder.Services.AddHttpClient();
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
 
         builder.Services.AddScoped<IChecklistService, ChecklistService>();
         builder.Services.AddScoped<ChecklistRepository>();
@@ -18,6 +20,7 @@ public class Program
 
         var app = builder.Build();
         app.UseHttpsRedirection();
+
         app.UseAuthorization();
         app.UseRouting();
         app.MapControllers();
@@ -26,6 +29,12 @@ public class Program
                     .AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader());
+
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
 
         app.Run();
     }
